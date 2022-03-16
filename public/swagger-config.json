@@ -9,6 +9,10 @@
       "name": "reservations v1"
     },
     {
+      "url": "./openapi/services-v1.yaml",
+      "name": "services v1"
+    },
+    {
       "url": "./openapi/jwt.yaml",
       "name": "jwt pong"
     }
