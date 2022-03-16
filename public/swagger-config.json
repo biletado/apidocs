@@ -1,0 +1,19 @@
+{
+  "urls": [
+    {
+      "url": "./openapi/assets-v1.yaml",
+      "name": "assets v1"
+    },
+    {
+      "url": "./openapi/reservations-v1.yaml",
+      "name": "reservations v1"
+    },
+    {
+      "url": "./openapi/jwt.yaml",
+      "name": "jwt pong"
+    }
+  ],
+  "plugins": [
+    "topbar"
+  ]
+}

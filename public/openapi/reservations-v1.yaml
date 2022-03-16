@@ -1,0 +1,196 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "Biletado reservations"
+  termsOfService: "http://biletado.gitlab.io/"
+  contact:
+    email: "dh@blaimi.de"
+  license:
+    name: "MIT"
+    url: "http://biletado.gitlab.io/LICENSE.txt"
+components:
+  securitySchemes:
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: /auth/realms/biletado/.well-known/openid-configuration
+  schemas:
+    error:
+      type: object
+      description: used to return error messages. If no message is necessary (e.g. on 404), an empty object is returned.
+      properties:
+        message:
+          type: string
+      # may be used for error-codes in the far future
+      additionalProperties: true
+    reservation:
+      type: object
+      description: |
+        contains a reservation for a specific room.
+        reservations on rooms MUST NOT overleap but `from` and `to` can be the same date
+        reservations are only valid if from < to
+      properties:
+        id:
+          type: string
+          format: uuid
+        from:
+          type: string
+          example: 2022-03-15
+        to:
+          type: string
+          example: 2022-03-17
+        room_id:
+          type: string
+          format: uuid
+      required:
+        - from
+        - to
+        - room_id
+paths:
+  /reservations/:
+    get:
+      summary: get all reservations
+      parameters:
+        - in: query
+          name: room_id
+          schema:
+            type: string
+            format: uuid
+          description: filter for a given room
+#  <==1===>        <======2=======><=3=>      reservations
+#           <----------------------------     request ?after=16.            -> returns 2 & 3
+#  ------------------------>                  request ?before=18.           -> returns 1 & 2
+#           <-------------->                  request ?after=16.&before=18. -> returns only 2
+#  15.     16.     17.     18.    19.  20.
+        - in: query
+          name: before
+          schema:
+            type: string
+            example: 2022-03-15
+          description: |
+            filter for reservations where `query:before` > `reservation:from`. `before` = `from` is accepted.
+            this can be used in combination with the other query-parametes to check for a reserved time frame
+        - in: query
+          name: after
+          schema:
+            type: string
+            example: 2022-03-17
+          description: |
+            filter for reservations where `query:after` < `reservation:to`. `after` = `to` is accepted.
+            this can be used in combination with the other query-parametes to check for a reserved time frame
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/reservation'
+    post:
+      security:
+        - keycloak: []
+      summary: add a new reservation
+      description: |
+        MAY contain a `id`. If so, this method behaves like `PUT`, including Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reservation'
+      responses:
+        "201":
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reservation'
+        "409":
+          description: conflicts with other reservations on the same room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "422":
+          description: room not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "401":
+          description: if the operation requires authentication but it's not given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /reservations/{id}/:
+    get:
+      summary: find reservation by id
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reservation'
+        "400":
+          description: invalid id supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      security:
+        - keycloak: []
+      summary: add or update a reservation with id
+      description: |
+        Authentication is optional and only necessary if an existing reservation gets updated.
+        checks if the `room_id` is valid by sending a request to the backend-assets service.
+        Needs to check on update/insert if the given room has already a reservation for the given timespan
+        (see `GET /reservations` Query-Params)
+      responses:
+        "204":
+          description: successful operation
+        "400":
+          description: invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "401":
+          description: if the operation requires authentication but it's not given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "422":
+          description: room not found or mismaching id in url and object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    delete:
+      security:
+        - keycloak: []
+      summary: deletes a reservation by id
+      responses:
+        "204":
+          description: successful operation
+        "401":
+          description: if the operation requires authentication but it's not given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'

@@ -1,0 +1,15 @@
+include:
+  - project: 'biletado/pipeline'
+    ref: "2"
+    file: '/docker-build.yml'
+
+pages:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo 'Nothing to do...'
+  artifacts:
+    paths:
+      - public
+  only:
+    - main

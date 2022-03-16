@@ -1,0 +1,33 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "Biletado jwt pong"
+  termsOfService: "http://biletado.gitlab.io/"
+  contact:
+    email: "dh@blaimi.de"
+  license:
+    name: "MIT"
+    url: "http://biletado.gitlab.io/LICENSE.txt"
+components:
+  securitySchemes:
+    openId:
+      type: openIdConnect
+      openIdConnectUrl: /auth/realms/biletado/.well-known/openid-configuration
+security:
+  - openId:
+      - openid
+paths:
+  /jwt/:
+    get:
+      summary: returns the access token
+      security:
+        - openId:
+            - openid
+      responses:
+        "200":
+          description: sucessful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true

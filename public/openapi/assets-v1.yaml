@@ -1,0 +1,450 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "Biletado assets"
+  termsOfService: "http://biletado.gitlab.io/"
+  contact:
+    email: "dh@blaimi.de"
+  license:
+    name: "MIT"
+    url: "http://biletado.gitlab.io/LICENSE.txt"
+tags:
+  - name: buildings
+    description: CRUD buildings
+  - name: storeys
+    description: CRUD storeys
+  - name: rooms
+    description: CRUD rooms
+components:
+  securitySchemes:
+    keycloak:
+      type: openIdConnect
+      openIdConnectUrl: /auth/realms/biletado/.well-known/openid-configuration
+  schemas:
+    error:
+      type: object
+      description: used to return error messages. If no message is necessary (e.g. on 404), an empty object is returned.
+      properties:
+        message:
+          type: string
+      # may be used for error-codes in the far future
+      additionalProperties: true
+    building:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: okcidento
+        address:
+          type: string
+          example: provluda strateto
+      required:
+        - name
+    storey:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        building_id:
+          type: string
+          format: uuid
+          description: id of the building
+        name:
+          type: string
+          example: subtegmento
+      required:
+        - building_id
+        - name
+    room:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        storey_id:
+          type: string
+          format: uuid
+          description: id of the storey
+        name:
+          type: string
+          example: 404
+      required:
+        - storey_id
+        - name
+
+paths:
+  /assets/buildings/:
+    get:
+      tags:
+        - buildings
+      summary: get all buildings
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/building'
+    post:
+      tags:
+        - buildings
+      summary: add a new building
+      description: MAY contain a uuid. If so, this method behaves like PUT.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/building'
+      security:
+        - keycloak: []
+      responses:
+        "201":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/building'
+        "400":
+          description: invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /assets/buildings/{id}/:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: uuid of the building
+    get:
+      tags:
+        - buildings
+      summary: get a building by id
+      responses:
+        "200":
+          description: sucessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/building'
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      tags:
+        - buildings
+      summary: add or update a building by id
+      description: if an id is supplied in the object, it MUST mach with the one in the url
+      security:
+        - keycloak: []
+      responses:
+        "204":
+          description: successful operation
+        "400":
+          description: invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "422":
+          description: mismaching id in url and object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/building'
+    delete:
+      tags:
+        - buildings
+      summary: delete a building by id
+      security:
+        - keycloak: []
+      responses:
+        "204":
+          description: sucessful operation
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "422":
+          description: deletion not possible because of existing storeys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /assets/storeys/:
+    get:
+      tags:
+        - storeys
+      summary: get all storeys
+      parameters:
+        - in: query
+          name: building_id
+          schema:
+            type: string
+            format: uuid
+          description: filter for a given building
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/storey'
+    post:
+      tags:
+        - storeys
+      summary: add a new storey
+      description: MAY contain a uuid. If so, this method behaves like PUT.
+      security:
+        - keycloak: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/storey'
+      responses:
+        "201":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storey'
+        "400":
+          description: invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "422":
+          description: building not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /assets/storeys/{id}/:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: uuid of the storey
+    get:
+      tags:
+        - storeys
+      summary: get a storey by id
+      responses:
+        "200":
+          description: sucessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storey'
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      tags:
+        - storeys
+      summary: add or update a storey by id
+      description: if an id is supplied in the object, it MUST mach with the one in the url
+      security:
+        - keycloak: []
+      responses:
+        "204":
+          description: successful operation
+        "400":
+          description: invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "422":
+          description: building not found or mismaching id in url and object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/building'
+    delete:
+      tags:
+        - storeys
+      summary: delete a storey by id
+      security:
+        - keycloak: []
+      responses:
+        "204":
+          description: sucessful operation
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "422":
+          description: deletion not possible because of existing rooms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /assets/rooms/:
+    get:
+      tags:
+        - rooms
+      summary: get all rooms
+      parameters:
+        - in: query
+          name: storey_id
+          schema:
+            type: string
+            format: uuid
+          description: filter for a given storey
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/room'
+    post:
+      tags:
+        - rooms
+      summary: add a new room
+      description: MAY contain a `id`. If so, this method behaves like `PUT`.
+      security:
+        - keycloak: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/room'
+      responses:
+        "201":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/room'
+        "400":
+          description: invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "422":
+          description: storey not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /assets/rooms/{id}/:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: uuid of the room
+    get:
+      tags:
+        - rooms
+      summary: get a room by id
+      responses:
+        "200":
+          description: sucessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/room'
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      tags:
+        - rooms
+      summary: add or update a room by id
+      description: if an id is supplied in the object, it MUST mach with the one in the url
+      security:
+        - keycloak: []
+      responses:
+        "204":
+          description: successful operation
+        "400":
+          description: invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "422":
+          description: storey not found or mismaching id in url and object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/storey'
+    delete:
+      tags:
+        - rooms
+      summary: delete a room by id
+      security:
+        - keycloak: []
+      responses:
+        "204":
+          description: sucessful operation
+        "422":
+          description: deletion not possible because of existing reservations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        "404":
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
