@@ -34,10 +34,10 @@ components:
           format: uuid
         from:
           type: string
-          example: 2022-03-15
+          format: date
         to:
           type: string
-          example: 2022-03-17
+          format: date
         room_id:
           type: string
           format: uuid
@@ -65,7 +65,7 @@ paths:
           name: before
           schema:
             type: string
-            example: 2022-03-15
+            format: date
           description: |
             filter for reservations where `query:before` > `reservation:from`. `before` = `from` is accepted.
             this can be used in combination with the other query-parametes to check for a reserved time frame
@@ -73,7 +73,7 @@ paths:
           name: after
           schema:
             type: string
-            example: 2022-03-17
+            format: date
           description: |
             filter for reservations where `query:after` < `reservation:to`. `after` = `to` is accepted.
             this can be used in combination with the other query-parametes to check for a reserved time frame
