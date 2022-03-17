@@ -14,9 +14,6 @@ paths:
   /jwt/:
     get:
       summary: returns the access token
-      security:
-        - openId:
-            - openid
       responses:
         "200":
           description: sucessful operation
