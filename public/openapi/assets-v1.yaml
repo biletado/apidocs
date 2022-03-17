@@ -436,14 +436,14 @@ paths:
       responses:
         "204":
           description: sucessful operation
-        "422":
-          description: deletion not possible because of existing reservations
+        "404":
+          description: not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-        "404":
-          description: not found
+        "422":
+          description: deletion not possible because of existing reservations
           content:
             application/json:
               schema:
