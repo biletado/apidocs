@@ -479,6 +479,8 @@ paths:
       tags:
         - rooms
       summary: delete a room by id
+      description: |
+        Checks if the room marked for deletion has active reservations by requesting the other service.
       security:
         - keycloak: []
       responses:
