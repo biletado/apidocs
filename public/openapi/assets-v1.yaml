@@ -16,10 +16,6 @@ tags:
   - name: rooms
     description: CRUD rooms
 components:
-  securitySchemes:
-    keycloak:
-      type: openIdConnect
-      openIdConnectUrl: /auth/realms/biletado/.well-known/openid-configuration
   schemas:
     error:
       type: object
@@ -103,7 +99,7 @@ paths:
             schema:
               $ref: '#/components/schemas/building'
       security:
-        - keycloak: []
+        - biletado: []
       responses:
         "201":
           description: successful operation
@@ -155,7 +151,7 @@ paths:
       summary: add or update a building by id
       description: if an id is supplied in the object, it MUST mach with the one in the url
       security:
-        - keycloak: []
+        - biletado: []
       responses:
         "204":
           description: successful operation
@@ -188,7 +184,7 @@ paths:
         - buildings
       summary: delete a building by id
       security:
-        - keycloak: []
+        - biletado: []
       responses:
         "204":
           description: sucessful operation
@@ -237,7 +233,7 @@ paths:
       summary: add a new storey
       description: MAY contain a uuid. If so, this method behaves like PUT.
       security:
-        - keycloak: []
+        - biletado: []
       requestBody:
         required: true
         content:
@@ -301,7 +297,7 @@ paths:
       summary: add or update a storey by id
       description: if an id is supplied in the object, it MUST mach with the one in the url
       security:
-        - keycloak: []
+        - biletado: []
       responses:
         "204":
           description: successful operation
@@ -334,7 +330,7 @@ paths:
         - storeys
       summary: delete a storey by id
       security:
-        - keycloak: []
+        - biletado: []
       responses:
         "204":
           description: sucessful operation
@@ -383,7 +379,7 @@ paths:
       summary: add a new room
       description: MAY contain a `id`. If so, this method behaves like `PUT`.
       security:
-        - keycloak: []
+        - biletado: []
       requestBody:
         required: true
         content:
@@ -447,7 +443,7 @@ paths:
       summary: add or update a room by id
       description: if an id is supplied in the object, it MUST mach with the one in the url
       security:
-        - keycloak: []
+        - biletado: []
       responses:
         "204":
           description: successful operation
@@ -482,7 +478,7 @@ paths:
       description: |
         Checks if the room marked for deletion has active reservations by requesting the other service.
       security:
-        - keycloak: []
+        - biletado: []
       responses:
         "204":
           description: sucessful operation

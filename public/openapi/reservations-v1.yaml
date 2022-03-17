@@ -9,10 +9,6 @@ info:
     name: "MIT"
     url: "http://biletado.gitlab.io/LICENSE.txt"
 components:
-  securitySchemes:
-    openId:
-      type: openIdConnect
-      openIdConnectUrl: /auth/realms/biletado/.well-known/openid-configuration
   schemas:
     error:
       type: object
@@ -88,7 +84,7 @@ paths:
                   $ref: '#/components/schemas/reservation'
     post:
       security:
-        - keycloak: []
+        - biletado: []
       summary: add a new reservation
       description: |
         MAY contain a `id`. If so, this method behaves like `PUT`, including Authentication
@@ -155,7 +151,7 @@ paths:
                 $ref: '#/components/schemas/error'
     put:
       security:
-        - keycloak: []
+        - biletado: []
       summary: add or update a reservation with id
       description: |
         Authentication is optional and only necessary if an existing reservation gets updated.
@@ -185,7 +181,7 @@ paths:
               $ref: '#/components/schemas/reservation'
     delete:
       security:
-        - keycloak: []
+        - biletado: []
       summary: deletes a reservation by id
       responses:
         "204":

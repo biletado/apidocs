@@ -8,14 +8,8 @@ info:
   license:
     name: "MIT"
     url: "http://biletado.gitlab.io/LICENSE.txt"
-components:
-  securitySchemes:
-    openId:
-      type: openIdConnect
-      openIdConnectUrl: /auth/realms/biletado/.well-known/openid-configuration
 security:
-  - openId:
-      - openid
+  - biletado: []
 paths:
   /jwt/:
     get:
