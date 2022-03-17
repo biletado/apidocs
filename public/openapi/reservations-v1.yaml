@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: "1.0.1"
+  version: "1.0.2"
   title: "Biletado reservations"
   termsOfService: "http://biletado.gitlab.io/"
   contact:
@@ -165,12 +165,6 @@ paths:
       responses:
         "204":
           description: successful operation
-        "400":
-          description: invalid input
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
         "401":
           description: if the operation requires authentication but it's not given
           content:
