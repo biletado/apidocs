@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: "1.0.0"
+  version: "1.1.0"
   title: "Biletado assets"
   termsOfService: "http://biletado.gitlab.io/"
   contact:
@@ -117,6 +117,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+        "401":
+          description: if no (valid) authentication is given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
   /assets/buildings/{id}/:
     parameters:
       - in: path
@@ -159,6 +165,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+        "401":
+          description: if no (valid) authentication is given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
         "422":
           description: mismaching id in url and object
           content:
@@ -180,6 +192,12 @@ paths:
       responses:
         "204":
           description: sucessful operation
+        "401":
+          description: if no (valid) authentication is given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
         "404":
           description: not found
           content:
@@ -239,6 +257,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+        "401":
+          description: if no (valid) authentication is given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
         "422":
           description: building not found
           content:
@@ -287,6 +311,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+        "401":
+          description: if no (valid) authentication is given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
         "422":
           description: building not found or mismaching id in url and object
           content:
@@ -308,6 +338,12 @@ paths:
       responses:
         "204":
           description: sucessful operation
+        "401":
+          description: if no (valid) authentication is given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
         "404":
           description: not found
           content:
@@ -367,6 +403,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+        "401":
+          description: if no (valid) authentication is given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
         "422":
           description: storey not found
           content:
@@ -415,6 +457,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+        "401":
+          description: if no (valid) authentication is given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
         "422":
           description: storey not found or mismaching id in url and object
           content:
@@ -436,6 +484,12 @@ paths:
       responses:
         "204":
           description: sucessful operation
+        "401":
+          description: if no (valid) authentication is given
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
         "404":
           description: not found
           content:
