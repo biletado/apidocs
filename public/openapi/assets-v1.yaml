@@ -91,7 +91,7 @@ paths:
       tags:
         - buildings
       summary: add a new building
-      description: MAY contain a uuid. If so, this method behaves like PUT.
+      description: MAY contain a uuid. If so, this method does the same checks as `PUT` does.
       requestBody:
         required: true
         content:
@@ -231,7 +231,7 @@ paths:
       tags:
         - storeys
       summary: add a new storey
-      description: MAY contain a uuid. If so, this method behaves like PUT.
+      description: MAY contain a uuid. If so, this method does the same checks as `PUT` does.
       security:
         - biletado: []
       requestBody:
@@ -377,7 +377,7 @@ paths:
       tags:
         - rooms
       summary: add a new room
-      description: MAY contain a `id`. If so, this method behaves like `PUT`.
+      description: MAY contain a `id`. If so, this method does the same checks as `PUT`.
       security:
         - biletado: []
       requestBody:
