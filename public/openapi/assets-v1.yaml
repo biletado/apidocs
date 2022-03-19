@@ -101,8 +101,16 @@ paths:
       security:
         - biletado: []
       responses:
+        "200":
+          description: |
+            Sucessful operation of updating an existing building.
+            This can only happen if a uuid gets passed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/building'
         "201":
-          description: successful operation
+          description: successful operation of creating a new building
           content:
             application/json:
               schema:
@@ -241,8 +249,16 @@ paths:
             schema:
               $ref: '#/components/schemas/storey'
       responses:
+        "200":
+          description: |
+            Sucessful operation of updating an existing storey.
+            This can only happen if a uuid gets passed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storey'
         "201":
-          description: successful operation
+          description: successful operation of creating a new storey
           content:
             application/json:
               schema:
@@ -387,8 +403,16 @@ paths:
             schema:
               $ref: '#/components/schemas/room'
       responses:
+        "200":
+          description: |
+            Sucessful operation of updating an existing room.
+            This can only happen if a uuid gets passed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/room'
         "201":
-          description: successful operation
+          description: successful operation of creating a new room
           content:
             application/json:
               schema:
