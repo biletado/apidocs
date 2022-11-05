@@ -3,6 +3,14 @@ include:
     ref: "2"
     file: '/docker-build.yml'
 
+openapi-validator:
+  stage: test
+  image:
+    name: jamescooke/openapi-validator
+    entrypoint: [ '/bin/sh', '-c' ]
+  script:
+    - 'lint-openapi public/openapi/*.yaml'
+
 pages:
   stage: deploy
   image: alpine:latest
