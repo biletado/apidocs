@@ -103,7 +103,7 @@ paths:
       responses:
         "200":
           description: |
-            Sucessful operation of updating an existing building.
+            Successful operation of updating an existing building.
             This can only happen if a uuid gets passed.
           content:
             application/json:
@@ -142,7 +142,7 @@ paths:
       summary: get a building by id
       responses:
         "200":
-          description: sucessful operation
+          description: successful operation
           content:
             application/json:
               schema:
@@ -176,7 +176,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
         "422":
-          description: mismaching id in url and object
+          description: mismatching id in url and object
           content:
             application/json:
               schema:
@@ -195,7 +195,7 @@ paths:
         - biletado: []
       responses:
         "204":
-          description: sucessful operation
+          description: successful operation
         "401":
           description: if no (valid) authentication is given
           content:
@@ -251,7 +251,7 @@ paths:
       responses:
         "200":
           description: |
-            Sucessful operation of updating an existing storey.
+            Successful operation of updating an existing storey.
             This can only happen if a uuid gets passed.
           content:
             application/json:
@@ -296,7 +296,7 @@ paths:
       summary: get a storey by id
       responses:
         "200":
-          description: sucessful operation
+          description: successful operation
           content:
             application/json:
               schema:
@@ -330,7 +330,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
         "422":
-          description: building not found or mismaching id in url and object
+          description: building not found or mismatching id in url and object
           content:
             application/json:
               schema:
@@ -349,7 +349,7 @@ paths:
         - biletado: []
       responses:
         "204":
-          description: sucessful operation
+          description: successful operation
         "401":
           description: if no (valid) authentication is given
           content:
@@ -405,7 +405,7 @@ paths:
       responses:
         "200":
           description: |
-            Sucessful operation of updating an existing room.
+            Successful operation of updating an existing room.
             This can only happen if a uuid gets passed.
           content:
             application/json:
@@ -450,7 +450,7 @@ paths:
       summary: get a room by id
       responses:
         "200":
-          description: sucessful operation
+          description: successful operation
           content:
             application/json:
               schema:
@@ -484,7 +484,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
         "422":
-          description: storey not found or mismaching id in url and object
+          description: storey not found or mismatching id in url and object
           content:
             application/json:
               schema:
@@ -505,7 +505,7 @@ paths:
         - biletado: []
       responses:
         "204":
-          description: sucessful operation
+          description: successful operation
         "401":
           description: if no (valid) authentication is given
           content:

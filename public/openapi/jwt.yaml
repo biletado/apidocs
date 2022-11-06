@@ -16,7 +16,7 @@ paths:
       summary: returns the access token
       responses:
         "200":
-          description: sucessful operation
+          description: successful operation
           content:
             application/json:
               schema:
