@@ -73,6 +73,23 @@ components:
         - name
 
 paths:
+  /assets/status/:
+    get:
+      summary: returns information about the backend-service and status
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                properties:
+                  authors:
+                    type: array
+                    items:
+                      type: string
+                    minItems: 1
   /assets/buildings/:
     get:
       tags:

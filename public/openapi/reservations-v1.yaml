@@ -42,6 +42,23 @@ components:
         - to
         - room_id
 paths:
+  /reservations/status/:
+    get:
+      summary: returns information about the backend-service and status
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                properties:
+                  authors:
+                    type: array
+                    items:
+                      type: string
+                    minItems: 1
   /reservations/:
     get:
       summary: get all reservations
