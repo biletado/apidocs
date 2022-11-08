@@ -1,5 +1,7 @@
 FROM swaggerapi/swagger-ui:v4.6.2
 
+RUN apk --no-cache add yq
+
 COPY ./public/ /usr/share/nginx/html/
 
 ENV CONFIG_URL "./swagger-config.json"
