@@ -1,10 +1,6 @@
 {
   "urls": [
     {
-      "url":  "./openapi/status.yaml",
-      "name": "status"
-    },
-    {
       "url": "./openapi/assets-v1.yaml",
       "name": "assets v1"
     },
