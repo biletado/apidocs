@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: "1.1.0"
+  version: "1.2.0"
   title: "Biletado services"
   termsOfService: "http://biletado.gitlab.io/"
   contact:
@@ -103,6 +103,12 @@ paths:
             type: string
             format: uuid
           description: filter for a given employee
+        - in: query
+          name: reservation_id
+          schema:
+            type: string
+            format: uuid
+          description: filter for a given reservation
       responses:
         "200":
           description: successful operation
