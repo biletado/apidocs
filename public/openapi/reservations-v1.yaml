@@ -8,6 +8,9 @@ info:
   license:
     name: "MIT"
     url: "http://biletado.gitlab.io/LICENSE.txt"
+tags:
+  - name: reservation
+    description: CRUD reservation
 components:
   schemas:
     error:
@@ -44,6 +47,8 @@ components:
 paths:
   /reservations/status/:
     get:
+      tags:
+        - reservation
       summary: returns information about the backend-service and status
       responses:
         "200":
@@ -68,6 +73,8 @@ paths:
                     pattern: "^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$"
   /reservations/:
     get:
+      tags:
+        - reservation
       summary: get all reservations
       parameters:
         - in: query
@@ -107,6 +114,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/reservation'
     post:
+      tags:
+        - reservation
       security:
         - biletado: []
       summary: add a new reservation
@@ -153,6 +162,8 @@ paths:
         required: true
         description: uuid of the reservation
     get:
+      tags:
+        - reservation
       summary: find reservation by id
       responses:
         "200":
@@ -174,6 +185,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
     put:
+      tags:
+        - reservation
       security:
         - biletado: []
       summary: add or update a reservation with id
@@ -204,6 +217,8 @@ paths:
             schema:
               $ref: '#/components/schemas/reservation'
     delete:
+      tags:
+        - reservation
       security:
         - biletado: []
       summary: deletes a reservation by id
