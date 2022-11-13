@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: "1.0.0"
+  version: "1.1.0"
   title: "Biletado services"
   termsOfService: "http://biletado.gitlab.io/"
   contact:
@@ -80,10 +80,17 @@ paths:
                 additionalProperties: true
                 properties:
                   authors:
+                    description: List of all authors of this backend.
                     type: array
                     items:
                       type: string
                     minItems: 1
+                  apiVersion:
+                    description: The exact version of the api implemented by this backend.
+                    type: string
+                    example: "1.2.3"
+                    # pattern from semver.org
+                    pattern: "^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$"
   /personal/assignments/:
     get:
       tags:
