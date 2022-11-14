@@ -9,7 +9,7 @@ info:
     name: "MIT"
     url: "http://biletado.gitlab.io/LICENSE.txt"
 tags:
-  - name: reservation
+  - name: reservations
     description: CRUD reservation
 components:
   schemas:
@@ -48,7 +48,7 @@ paths:
   /reservations/status/:
     get:
       tags:
-        - reservation
+        - reservations
       summary: returns information about the backend-service and status
       responses:
         "200":
@@ -74,7 +74,7 @@ paths:
   /reservations/:
     get:
       tags:
-        - reservation
+        - reservations
       summary: get all reservations
       parameters:
         - in: query
@@ -115,7 +115,7 @@ paths:
                   $ref: '#/components/schemas/reservation'
     post:
       tags:
-        - reservation
+        - reservations
       security:
         - biletado: []
       summary: add a new reservation
@@ -163,7 +163,7 @@ paths:
         description: uuid of the reservation
     get:
       tags:
-        - reservation
+        - reservations
       summary: find reservation by id
       responses:
         "200":
@@ -186,7 +186,7 @@ paths:
                 $ref: '#/components/schemas/error'
     put:
       tags:
-        - reservation
+        - reservations
       security:
         - biletado: []
       summary: add or update a reservation with id
@@ -218,7 +218,7 @@ paths:
               $ref: '#/components/schemas/reservation'
     delete:
       tags:
-        - reservation
+        - reservations
       security:
         - biletado: []
       summary: deletes a reservation by id

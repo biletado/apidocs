@@ -9,9 +9,9 @@ info:
     name: "MIT"
     url: "http://biletado.gitlab.io/LICENSE.txt"
 tags:
-  - name: employee
+  - name: employees
     description: CRUD employee
-  - name: assignment
+  - name: assignments
     description: CRUD assignment between employee and reservation
 components:
   schemas:
@@ -94,7 +94,7 @@ paths:
   /personal/assignments/:
     get:
       tags:
-        - assignment
+        - assignments
       summary: get all personal assignments
       parameters:
         - in: query
@@ -124,7 +124,7 @@ paths:
                     minItems: 0
     post:
       tags:
-        - assignment
+        - assignments
       summary: add a new assignment
       description: MAY contain a uuid. If so, this method does the same checks as `PUT` does.
       requestBody:
@@ -182,7 +182,7 @@ paths:
         description: uuid of the assignment
     get:
       tags:
-        - assignment
+        - assignments
       summary: get an assignment by id
       responses:
         "200":
@@ -199,7 +199,7 @@ paths:
                 $ref: '#/components/schemas/error'
     put:
       tags:
-        - assignment
+        - assignments
       summary: add or update an assignment by id
       description: if an id is supplied in the object, it MUST mach with the one in the url
       security:
@@ -237,7 +237,7 @@ paths:
               $ref: '#/components/schemas/assignment'
     delete:
       tags:
-        - assignment
+        - assignments
       summary: delete an assignment by id
       security:
         - biletado: []
@@ -259,7 +259,7 @@ paths:
   /personal/employees/:
     get:
       tags:
-        - employee
+        - employees
       summary: get all employees
       responses:
         "200":
@@ -277,7 +277,7 @@ paths:
                     minItems: 0
     post:
       tags:
-        - employee
+        - employees
       summary: add a new employee
       description: MAY contain a uuid. If so, this method does the same checks as `PUT` does.
       security:
@@ -326,7 +326,7 @@ paths:
         description: uuid of the employee
     get:
       tags:
-        - employee
+        - employees
       summary: get an employee by id
       responses:
         "200":
@@ -343,7 +343,7 @@ paths:
                 $ref: '#/components/schemas/error'
     put:
       tags:
-        - employee
+        - employees
       summary: add or update an employee by id
       description: if an id is supplied in the object, it MUST mach with the one in the url
       security:
@@ -377,7 +377,7 @@ paths:
               $ref: '#/components/schemas/employee'
     delete:
       tags:
-        - employee
+        - employees
       summary: delete an employee by id
       security:
         - biletado: []
