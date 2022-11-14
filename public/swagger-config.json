@@ -10,7 +10,7 @@
     },
     {
       "url": "./openapi/personal-v1.yaml",
-      "name": "personal-v1"
+      "name": "personal v1"
     },
     {
       "url": "./openapi/jwt.yaml",
