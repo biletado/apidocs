@@ -47,8 +47,6 @@ components:
 paths:
   /reservations/status/:
     get:
-      tags:
-        - reservations
       summary: returns information about the backend-service and status
       responses:
         "200":
