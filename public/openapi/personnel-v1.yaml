@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 info:
   version: "1.2.0"
-  title: "Biletado personal"
+  title: "Biletado personnel"
   termsOfService: "http://biletado.gitlab.io/"
   contact:
     email: "dh@blaimi.de"
@@ -67,7 +67,7 @@ components:
         - role
 
 paths:
-  /personal/status/:
+  /personnel/status/:
     get:
       summary: returns information about the backend-service and status
       responses:
@@ -91,11 +91,11 @@ paths:
                     example: "1.2.3"
                     # pattern from semver.org
                     pattern: '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'
-  /personal/assignments/:
+  /personnel/assignments/:
     get:
       tags:
         - assignments
-      summary: get all personal assignments
+      summary: get all personnel assignments
       parameters:
         - in: query
           name: employee_id
@@ -171,7 +171,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-  /personal/assignments/{id}/:
+  /personnel/assignments/{id}/:
     parameters:
       - in: path
         name: id
@@ -256,7 +256,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-  /personal/employees/:
+  /personnel/employees/:
     get:
       tags:
         - employees
@@ -315,7 +315,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-  /personal/employees/{id}/:
+  /personnel/employees/{id}/:
     parameters:
       - in: path
         name: id
