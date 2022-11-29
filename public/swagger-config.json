@@ -9,8 +9,8 @@
       "name": "reservations v1"
     },
     {
-      "url": "./openapi/personal-v1.yaml",
-      "name": "personal v1"
+      "url": "./openapi/personnel-v1.yaml",
+      "name": "personnel v1"
     },
     {
       "url": "./openapi/jwt.yaml",
