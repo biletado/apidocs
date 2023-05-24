@@ -8,6 +8,23 @@ plugins:
       - public/openapi/assets-v1.yaml
       - public/reservations-v1.yaml
       - public/personnel-v1.yaml
+
+      - oas3/clean.yml
+      - oas3/clean-with-tabs.yml
+      - oas3/complex-test-compose-model.yaml
+      - oas3/component-path-example.yaml
+      - oas3/compose-model-items.yaml
+      - oas3/compose-model-props.yaml
+      - oas3/compose-models-use-array.yaml
+      - oas3/duplicate-keys.json
+      - oas3/err-and-warn.yaml
+      - oas3/just-warn.yml
+      - oas3/test-compose-model.yaml
+      - oas3/test-formats.yaml
+      - oas3/testoneof.yaml
+      # invalid json returns with error-code 1
+      #- oas3/trailing-comma.json
+      - oas3/warn-threshold.yml
   csslint:
     enabled: false
   coffeelint:
