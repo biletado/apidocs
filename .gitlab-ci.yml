@@ -1,7 +1,7 @@
 include:
   - project: 'biletado/pipeline'
-    ref: "2"
-    file: '/docker-build.yml'
+    ref: "3"
+    file: '/image-build.yml'
   - template: Code-Quality.gitlab-ci.yml
 
 pages:
