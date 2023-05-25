@@ -2,6 +2,7 @@ include:
   - project: 'biletado/pipeline'
     ref: "2"
     file: '/docker-build.yml'
+  - template: Code-Quality.gitlab-ci.yml
 
 pages:
   stage: deploy
@@ -13,3 +14,13 @@ pages:
       - public
   only:
     - main
+
+code_quality:
+  variables:
+    CODECLIMATE_DEV: 1
+  artifacts:
+    paths:
+      - gl-code-quality-report.json
+  before_script:
+    - docker pull registry.gitlab.com/blaimi/openapi-validator/codeclimate-openapi
+    - docker tag registry.gitlab.com/blaimi/openapi-validator/codeclimate-openapi codeclimate/codeclimate-openapi
