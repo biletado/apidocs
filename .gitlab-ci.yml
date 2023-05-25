@@ -1,6 +1,6 @@
 include:
   - project: 'biletado/pipeline'
-    ref: "3"
+    ref: "4"
     file: '/image-build.yml'
   - template: Code-Quality.gitlab-ci.yml
 
